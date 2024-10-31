@@ -1,33 +1,40 @@
-"use server";
+'use server';
 
-import React from "react";
-import { Resend } from "resend";
-import { validateString, getErrorMessage } from "@/lib/utils";
-import ContactFormEmail from "@/email/contact-form-email";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { Resend } from 'resend';
+import { validateString, validateEmail, getErrorMessage } from '@/lib/utils';
+import ContactFormEmail from '@/email/contact-form-email';
+import React from 'react';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const receiverEmail = process.env.RECEIVE_EMAIL || 'connect2abdulaziz@gmail.com';
 
-export const sendEmail = async (formData: FormData) => {
-  const senderEmail = formData.get("senderEmail");
-  const message = formData.get("message");
+interface EmailResponse {
+  data?: unknown;
+  error?: string;
+}
+interface FormData {
+  senderEmail: string;
+  message: string;
+}
 
-  // simple server-side validation
-  if (!validateString(senderEmail, 500)) {
-    return {
-      error: "Invalid sender email",
-    };
+const createErrorResponse = (message: string): EmailResponse => ({ error: message });
+
+export const sendEmail = async (formData: FormData): Promise<EmailResponse> => {
+  const {senderEmail, message} = formData;
+
+  // Simple server-side validation
+  if (!validateEmail(senderEmail)) {
+    return createErrorResponse("Invalid sender email");
   }
-  if (!validateString(message, 5000)) {
-    return {
-      error: "Invalid message",
-    };
+  if (!validateString(message, 50000)) {
+    return createErrorResponse("Invalid message");
   }
 
-  let data;
   try {
-    data = await resend.emails.send({
+    const data = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
-      to: "bytegrad@gmail.com",
+      to: receiverEmail,
       subject: "Message from contact form",
       reply_to: senderEmail,
       react: React.createElement(ContactFormEmail, {
@@ -35,13 +42,20 @@ export const sendEmail = async (formData: FormData) => {
         senderEmail: senderEmail,
       }),
     });
-  } catch (error: unknown) {
-    return {
-      error: getErrorMessage(error),
-    };
+
+    return { data };
+  } catch (error) {
+    return createErrorResponse(getErrorMessage(error));
+  }
+};
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === 'POST') {
+    const formData = req.body; 
+    const response = await sendEmail(formData);
+
+    return res.status(response.error ? 400 : 200).json(response);
   }
 
-  return {
-    data,
-  };
-};
+  return res.status(405).json({ error: "Method not allowed" });
+}
