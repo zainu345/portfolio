@@ -2,6 +2,7 @@ import React from "react";
 
 type SectionHeadingProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
 export default function SectionHeading({ children }: SectionHeadingProps) {

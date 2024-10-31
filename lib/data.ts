@@ -12,7 +12,7 @@ export const links = [
     hash: "#home",
   },
   {
-    name: "about",
+    name: "About",
     hash: "#about",
   },
   {
@@ -85,23 +85,40 @@ export const projectsData = [
 ] as const;
 
 export const skillsData = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "Git",
-  "Tailwind",
-  "Prisma",
-  "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Express",
-  "PostgreSQL",
-  "Python",
-  "Django",
-  "Framer Motion",
+  {
+    category: "Frontend Development",
+    skills: [
+      "HTML", "CSS", "JavaScript", "TypeScript",
+      "React", "Next.js", "Bootstrap", "Tailwind",
+      "Styled Components", "Material UI", "Shadcn",
+    ],
+  },
+  {
+    category: "Backend Development",
+    skills: [
+      "Node.js", "Express", "Nest.js", "GraphQL",
+      "PostgreSQL", "MySQL", "MongoDB", "SQLite", "Firebase",
+      "Flask",
+    ],
+  },
+  {
+    category: "Programming Languages",
+    skills: [
+      "C++", "C#", "C", "Python", "Java", "Kotlin",
+    ],
+  },
+  {
+    category: "Tools & Technologies",
+    skills: [
+      "Git", "GitHub", "AJAX", "JSON",
+      "Deployment (Vercel, Heroku)", "AWS", "Prompt Engineering",
+    ],
+  },
+  {
+    category: "Professional Skills",
+    skills: [
+      "Full Stack Development", "Problem Solving", "Team Collaboration", "Agile Methodologies",
+    ],
+  },
 ] as const;
+

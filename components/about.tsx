@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 
 export default function About() {
-  const { ref } = useSectionInView("about");
+  const { ref } = useSectionInView("About");
 
   return (
     <motion.section
@@ -15,34 +15,32 @@ export default function About() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.175 }}
-      id="About"
+      id="about"
     >
-      <SectionHeading>About me</SectionHeading>
-      <p className="mb-3">
-        After graduating with a degree in{" "}
-        <span className="font-medium">Accounting</span>, I decided to pursue my
-        passion for programming. I enrolled in a coding bootcamp and learned{" "}
-        <span className="font-medium">full-stack web development</span>.{" "}
-        <span className="italic">My favorite part of programming</span> is the
-        problem-solving aspect. I <span className="underline">love</span> the
-        feeling of finally figuring out a solution to a problem. My core stack
-        is{" "}
-        <span className="font-medium">
-          React, Next.js, Node.js, and MongoDB
-        </span>
-        . I am also familiar with TypeScript and Prisma. I am always looking to
-        learn new technologies. I am currently looking for a{" "}
-        <span className="font-medium">full-time position</span> as a software
-        developer.
+      <SectionHeading>About Me</SectionHeading>
+      <p className="mb-5 text-lg text-gray-700 dark:text-gray-300">
+        🚀 I'm a passionate Full Stack Developer with expertise in{" "}
+        <span className="font-medium">MERN</span>, ReactJS, NodeJS, and TypeScript. 
+        A recent graduate from PUCIT, Lahore, I achieved a 4.0 CGPA in core programming subjects.
+      </p>
+      
+      <p className="mb-5 text-lg text-gray-700 dark:text-gray-300">
+        💼 Currently, I'm an Associate Software Engineer (MERN Stack) at Kwanso, where I focus on ReactJS, NodeJS, and TypeScript. 
+        I gained practical experience during my summer internships at DevTown and Pyflow, enhancing my MERN Stack skills.
       </p>
 
-      <p>
-        <span className="italic">When I'm not coding</span>, I enjoy playing
-        video games, watching movies, and playing with my dog. I also enjoy{" "}
-        <span className="font-medium">learning new things</span>. I am currently
-        learning About{" "}
-        <span className="font-medium">history and philosophy</span>. I'm also
-        learning how to play the guitar.
+      <p className="mb-5 text-lg text-gray-700 dark:text-gray-300">
+        🔧 My skill set includes Full Stack Development (MERN), ReactJS, NodeJS, TypeScript, Vue.js, AWS, Git & GitHub, 
+        and problem-solving, showcased through my achievements on LeetCode.
+      </p>
+
+      <p className="text-lg text-gray-700 dark:text-gray-300">
+        🌟 Career highlights include ranking in the Top 10 at the ICPC Asia Online Preliminary Programming Contest 2023, 
+        being named "Student of the Year" at Akhuwat College Kasur in 2017, and achieving Rank 1 in the Quick Mind Game.
+      </p>
+
+      <p className="text-lg text-gray-700 dark:text-gray-300">
+        Explore my GitHub for web development projects. I'm excited to take on new challenges and collaborate in the dynamic world of technology!
       </p>
     </motion.section>
   );
