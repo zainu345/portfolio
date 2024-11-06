@@ -1,32 +1,38 @@
-"use client";
+'use client';
 
 import { useRef } from "react";
 import { projectsData } from "@/lib/data";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-type ProjectProps = (typeof projectsData)[number];
+type ProjectProps = (typeof projectsData)[number] & {
+  githubUrl?: string;
+  liveUrl?: string;
+};
 
 export default function Project({
   title,
   description,
   tags,
   imageUrl,
+  githubUrl,
+  liveUrl,
 }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["0 1", "1.33 1"],
   });
-  const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   return (
     <motion.div
       ref={ref}
       style={{
-        scale: scaleProgess,
-        opacity: opacityProgess,
+        scale: scaleProgress,
+        opacity: opacityProgress,
       }}
       className="group mb-3 sm:mb-8 last:mb-0"
     >
@@ -46,6 +52,32 @@ export default function Project({
               </li>
             ))}
           </ul>
+
+          {/* Links for GitHub and Live URL */}
+          <div className="mt-4 flex space-x-4">
+            {githubUrl && (
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm flex items-center bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+              >
+                <FaGithub className="mr-2" />
+                View Code
+              </a>
+            )}
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition"
+              >
+                <FaExternalLinkAlt className="mr-2" />
+                View Live
+              </a>
+            )}
+          </div>
         </div>
 
         <Image

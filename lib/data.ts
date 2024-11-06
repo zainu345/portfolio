@@ -43,6 +43,14 @@ export const experiencesData = [
     date: "2019",
   },
   {
+    title: "Graduated bootcamp",
+    location: "Miami, FL",
+    description:
+      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
+    icon: React.createElement(LuGraduationCap),
+    date: "2019",
+  },
+  {
     title: "Front-End Developer",
     location: "Orlando, FL",
     description:
@@ -67,6 +75,17 @@ export const projectsData = [
       "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
     tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
     imageUrl: corpcommentImg,
+    githubUrl: "https://github.com/abdulaziz1997/corpcomment",
+    liveUrl: "https://corpcomment.vercel.app/",
+  },
+  {
+    title: "CorpComment",
+    description:
+      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
+    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+    imageUrl: corpcommentImg,
+    githubUrl: "https://github.com/abdulaziz1997/corpcomment",
+    liveUrl: "https://corpcomment.vercel.app/",
   },
   {
     title: "rmtDev",
