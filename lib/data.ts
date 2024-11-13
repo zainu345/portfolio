@@ -79,6 +79,8 @@ export const projectsData = [
       "Revolutionizing communication and entertainment, this voice clone project uses advanced AI and NLP technology to replicate voices. It has applications in virtual assistants, voiceovers, and personalized interactions across industries like entertainment and gaming.",
     tags: ["Python", "React.js", "MongoDB", "Machine Learning", "NLP"],
     imageUrl: "https://i.imgur.com/28n1ZkZ.png",
+    githubUrl: "",
+    liveUrl: ""
     
   },
   {
@@ -88,7 +90,9 @@ export const projectsData = [
       "A backend project that summarizes court cases from PDFs, optimized to generate PDF summaries with detailed case info, including page and line numbers. Developed with a focus on prompt engineering and performance enhancement.",
     tags: ["Nest.js", "React.js", "GraphQL", "PostgreSQL", "TypeORM", "Prompt Engineering"],
     imageUrl: "https://i.imgur.com/eNTzxaD.png",
-    liveUrl:"https://4corners.com/"
+    liveUrl:"https://4corners.com/",
+    githubUrl: "",
+
   },
   {
     id: 3,
@@ -108,6 +112,7 @@ export const projectsData = [
     tags: ["Python", "JavaScript", "E-commerce", "Mongodb", "JQuery"],
     imageUrl: "https://i.imgur.com/2R6AbrY.png",
     githubUrl: "https://github.com/connect2abdulaziz/StitchXcel",
+    liveUrl: ""
   },
   {
     id: 4,

@@ -7,11 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
 
-type ProjectProps = (typeof projectsData)[number] & {
-  githubUrl?: string;
-  liveUrl?: string;
-};
-
+type ProjectProps = (typeof projectsData)[number];
 export default function Project({
   title,
   description,

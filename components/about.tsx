@@ -7,7 +7,7 @@ import { useSectionInView } from "@/lib/hooks";
 
 export default function About() {
   const { ref } = useSectionInView("About");
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState(0);
 
   // Variants for folded and expanded states
   const foldedVariants = {
@@ -22,8 +22,8 @@ export default function About() {
   };
 
   // Toggle expanded state
-  const toggleParagraph = (index) => {
-    setExpanded(expanded === index ? null : index);
+  const toggleParagraph = (index: number) => {
+    setExpanded(expanded === index ? 0 : index);
   };
 
   return (
