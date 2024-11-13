@@ -10,6 +10,7 @@ html.dark {
   --line-color: rgba(255, 255, 255, 0.2);
 }
 
-.borderBlack {
-  @apply border border-black/10;
+/* Example usage of Tailwind's utility classes and custom theme extension */
+.border-line {
+  @apply border border-gray-200 dark:border-gray-700;
 }

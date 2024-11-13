@@ -17,13 +17,13 @@ export default function Contact() {
   const [error, setError] = useState("");
 
   // Email validation function
-  const isValidEmail = (email:string) => {
+  const isValidEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
   // Handle form submission
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setError("");
 
@@ -60,7 +60,7 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
+      className="bg-gray-100 max-w-[45rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-6 mx-auto mb-20 sm:mb-28"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -68,19 +68,17 @@ export default function Contact() {
     >
       <SectionHeading>Contact me</SectionHeading>
 
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
+      <p className="text-gray-700 -mt-6 dark:text-gray-300">
         Please contact me directly at{" "}
-        <a className="underline" href="mailto:connect2abdulaziz@gmail.com">
+        <a className="underline text-blue-500 dark:text-blue-400" href="mailto:connect2abdulaziz@gmail.com">
           connect2abdulaziz@gmail.com
         </a>{" "}
         or through this form.
       </p>
 
-     
-
-      <form className="mt-10 flex flex-col dark:text-black" onSubmit={handleSubmit}>
+      <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
         <input
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-14 px-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-white/20 dark:hover:bg-white/30 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
           name="senderEmail"
           type="email"
           required
@@ -90,8 +88,9 @@ export default function Contact() {
           placeholder="Your email"
         />
         {error && <p className="pt-2 text-red-500">{error}</p>}
+        
         <textarea
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-52 my-3 rounded-lg border border-gray-300 dark:border-gray-700 p-4 bg-white dark:bg-white/20 dark:hover:bg-white/30 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
           name="message"
           placeholder="Your message"
           required
@@ -99,6 +98,7 @@ export default function Contact() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
+        
         <SubmitBtn />
       </form>
     </motion.section>
