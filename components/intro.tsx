@@ -56,19 +56,19 @@ export default function Intro() {
       >
         <span className="font-bold">Hi, I'm Abdul Aziz.</span> A{" "}
         <span className="font-bold">Full Stack Developer</span> with{" "}
-        <span className="underline">1 year of experience</span> in{" "}
+        <span className="font-semibold text-blue-400 dark:text-blue-600">1+ year of professional experience</span> in{" "}
         <span className="italic">MERN, Nest.js, Next.js, and prompt engineering</span>.
       </motion.h1>
 
       <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
+        className="flex flex-col sm:flex-row items-center  justify-center gap-2 px-4 text-lg font-medium"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
         <Link
           href="#contact"
-          className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
+          className="group bg-gray-700 text-white px-7 py-3 flex items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-lg rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
           onClick={() => {
             setActiveSection("Contact");
             setTimeOfLastClick(Date.now());
@@ -79,7 +79,7 @@ export default function Intro() {
         </Link>
 
         <a
-          className="group bg-gray-200 hover:bg-gray-300 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
+          className="group bg-gray-200 hover:bg-gray-300 px-7 py-3 flex items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-lg rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
           href="/CV.pdf"
           download
         >
@@ -88,7 +88,7 @@ export default function Intro() {
         </a>
         <div className="flex px-4 gap-2">
           <a
-            className="bg-gray-200 hover:bg-gray-300 p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+            className="bg-gray-200 hover:bg-gray-300 p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-lg rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
             href="https://linkedin.com/in/connect2abdulaziz"
             target="_blank"
             rel="noopener noreferrer"
@@ -97,7 +97,7 @@ export default function Intro() {
           </a>
 
           <a
-            className="bg-gray-200 hover:bg-gray-300 p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+            className="bg-gray-200 hover:bg-gray-300 p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] border border-gray-300 dark:border-gray-700 shadow-lg rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
             href="https://github.com/connect2abdulaziz"
             target="_blank"
             rel="noopener noreferrer"

@@ -45,7 +45,7 @@ export default function Project({
       }}
       className="group mb-3 sm:mb-8 last:mb-0 transition-transform duration-500 ease-in-out transform hover:scale-105"
     >
-      <section className="bg-gray-100 max-w-[45rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl">
+      <section className="bg-gray-100 max-w-[45rem] border rounded-lg border-gray-300 dark:border-gray-700 overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl">
         {/* Text Content Side */}
         <div className="py-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
           <Link href={`/projects/${id}`} className="hover:text-blue-600 transition-colors">
@@ -75,7 +75,7 @@ export default function Project({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm flex items-center bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition transform hover:scale-105"
+                  className="text-sm flex items-center bg-gray-700 dark:bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition transform hover:scale-105"
                 >
                   <FaGithub className="mr-2" />
                   View Code
@@ -86,7 +86,7 @@ export default function Project({
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition transform hover:scale-105"
+                  className="text-sm flex items-center bg-blue-400 dark:bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-500 dark:hover:bg-blue-400 transition transform hover:scale-105"
                 >
                   <FaExternalLinkAlt className="mr-2" />
                   View Live

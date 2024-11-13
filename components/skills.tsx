@@ -38,7 +38,7 @@ export default function Skills() {
           <ul id="skills" ref={ref} className="flex flex-wrap justify-center gap-4 text-sm sm:text-lg text-gray-700 dark:text-gray-300">
             {category.skills.map((skill, index) => (
               <motion.li id="skills" ref={ref}
-                className="bg-gray-100 border border-black/5 rounded-lg hover:bg-gray-200 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl px-4 py-2 sm:px-6 sm:py-3"
+                className="bg-gray-100 border rounded-lg border-gray-300 dark:border-gray-700 shadow-lg  dark:shadow-xl hover:bg-gray-200 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl px-4 py-2 sm:px-6 sm:py-3"
                 key={index}
                 variants={fadeInAnimationVariants}
                 initial="initial"

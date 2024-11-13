@@ -5,7 +5,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 dark:from-white/10 dark:to-white/20 p-8 text-center rounded-lg shadow-md transition-transform transform border-t border-gray-300 dark:border-gray-700">
+    <footer className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 dark:from-white/5 dark:to-white/10 p-4 text-center rounded-lg shadow-md transition-transform transform border-t border-gray-300 dark:border-gray-700">
       <div className="text-xl font-semibold text-gray-700 dark:text-gray-300">
         &copy; 2024 Abdul Aziz
       </div>

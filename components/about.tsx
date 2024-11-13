@@ -29,7 +29,7 @@ export default function About() {
   return (
     <motion.section
       ref={ref}
-      className="mb-28 max-w-[45rem] mx-auto text-center leading-8 sm:mb-40 scroll-mt-28 bg-gray-100 hover:bg-gray-200 p-8 rounded-lg shadow-lg dark:bg-white/10 dark:hover:bg-white/15"
+      className="mb-28 max-w-[45rem] mx-auto text-center leading-8 sm:mb-40 scroll-mt-28 bg-gray-100 hover:bg-gray-200 p-8  border rounded-lg border-gray-300 dark:border-gray-700 shadow-lg  dark:shadow-xl dark:bg-white/10 dark:hover:bg-white/15"
       initial="hidden"
       animate="visible"
       variants={foldedVariants}

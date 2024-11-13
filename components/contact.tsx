@@ -60,7 +60,7 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="bg-gray-100 max-w-[45rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-6 mx-auto mb-20 sm:mb-28"
+      className="bg-gray-100 max-w-[45rem] border border-black/5 dark:border-gray-700 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-12 mx-auto mb-20 sm:mb-28"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -78,7 +78,7 @@ export default function Contact() {
 
       <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
         <input
-          className="h-14 px-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-white/20 dark:hover:bg-white/30 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
+          className="h-14 px-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-white/5 dark:hover:bg-white/10 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
           name="senderEmail"
           type="email"
           required
@@ -90,7 +90,7 @@ export default function Contact() {
         {error && <p className="pt-2 text-red-500">{error}</p>}
         
         <textarea
-          className="h-52 my-3 rounded-lg border border-gray-300 dark:border-gray-700 p-4 bg-white dark:bg-white/20 dark:hover:bg-white/30 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
+          className="h-52 my-3 rounded-lg border border-gray-300 dark:border-gray-700 p-4 bg-white dark:bg-white/5 dark:hover:bg-white/10 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
           name="message"
           placeholder="Your message"
           required
