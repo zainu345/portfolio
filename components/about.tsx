@@ -26,6 +26,17 @@ export default function About() {
     setExpanded(expanded === index ? 0 : index);
   };
 
+  // Event handler for hover and click (for mobile)
+  const handleInteraction = (index: number, isTouchDevice: boolean) => {
+    if (isTouchDevice) {
+      // For mobile/touch devices, use click/tap
+      toggleParagraph(index);
+    }
+  };
+
+  // Check if it's a touch device (simple check)
+  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   return (
     <motion.section
       ref={ref}
@@ -48,7 +59,9 @@ export default function About() {
         <motion.div
           key={index}
           className="mb-5 text-lg text-gray-700 dark:text-gray-300 cursor-pointer"
-          onHoverStart={() => toggleParagraph(index)}
+          // Use both onClick for mobile and onHoverStart for desktop
+          onMouseEnter={() => !isTouchDevice && toggleParagraph(index)} // Only trigger on hover for non-touch devices
+          onClick={() => isTouchDevice && toggleParagraph(index)}  // Trigger onClick for touch devices
           initial="folded"
           animate={expanded === index ? "expanded" : "folded"}
           variants={foldedVariants}
