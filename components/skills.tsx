@@ -43,30 +43,6 @@ export default function Skills() {
       className="mb-28 max-w-[62rem] scroll-mt-28 px-4 sm:px-8 mx-auto text-center"
     >
       <SectionHeading>My Skills</SectionHeading>
-<<<<<<< HEAD
-      {skillsData.map((category, categoryIndex) => (
-        <div id="skills" ref={ref} key={categoryIndex} className="mb-6">
-          <h3 id="skills" ref={ref} className="text-xl sm:text-2xl font-semibold mb-3 text-gray-800 dark:text-gray-200 underline">
-            {category.category}
-          </h3>
-          <ul id="skills" ref={ref} className="flex flex-wrap justify-center gap-4 text-sm sm:text-lg text-gray-700 dark:text-gray-300">
-            {category.skills.map((skill, index) => (
-              <motion.li id="skills" ref={ref}
-                className="bg-gray-100 border rounded-lg border-gray-300 dark:border-gray-700 shadow-lg  dark:shadow-xl hover:bg-gray-200 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl px-4 py-2 sm:px-6 sm:py-3"
-                key={index}
-                variants={fadeInAnimationVariants}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                custom={index}
-              >
-                {skill}
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      ))}
-=======
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
         {skillsData.map((category, categoryIndex) => (
@@ -98,7 +74,7 @@ export default function Skills() {
             {/* Skills with circular progress bars */}
             <div className="flex flex-wrap justify-center gap-6">
               {category.skills.map((skill, index) => {
-                const proficiency =  skill.proficiency; // For illustration, use random proficiency
+                const proficiency = skill.proficiency; // For illustration, use random proficiency
 
                 return (
                   <motion.div
@@ -131,7 +107,6 @@ export default function Skills() {
           </motion.div>
         ))}
       </div>
->>>>>>> feature/PW-6
     </section>
   );
 }

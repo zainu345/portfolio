@@ -54,11 +54,8 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-<<<<<<< HEAD
-      className="bg-gray-100 max-w-[45rem] border border-black/5 dark:border-gray-700 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-12 mx-auto mb-20 sm:mb-28"
-=======
       className="bg-gray-100 w-full max-w-[95%] md:max-w-2xl lg:max-w-4xl border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-6 mx-auto mb-10 md:mb-20"
->>>>>>> feature/PW-6
+
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
