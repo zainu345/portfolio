@@ -11,23 +11,19 @@ import toast from "react-hot-toast";
 export default function Contact() {
   const { ref } = useSectionInView("Contact");
 
-  // State management for form inputs and errors
   const [senderEmail, setSenderEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  // Email validation function
   const isValidEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
-  // Handle form submission
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setError("");
 
-    // Frontend validation
     if (!isValidEmail(senderEmail)) {
       setError("Please enter a valid email address.");
       return;
@@ -41,7 +37,6 @@ export default function Contact() {
       return;
     }
 
-    // Send email
     const formData = { senderEmail, message };
     const { error } = await sendEmail(formData);
 
@@ -50,7 +45,6 @@ export default function Contact() {
       return;
     }
 
-    // Reset form and show success message
     setSenderEmail("");
     setMessage("");
     toast.success("Email sent successfully!");
@@ -60,7 +54,11 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
+<<<<<<< HEAD
       className="bg-gray-100 max-w-[45rem] border border-black/5 dark:border-gray-700 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-12 mx-auto mb-20 sm:mb-28"
+=======
+      className="bg-gray-100 w-full max-w-[95%] md:max-w-2xl lg:max-w-4xl border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-auto hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 shadow-lg hover:shadow-xl p-6 mx-auto mb-10 md:mb-20"
+>>>>>>> feature/PW-6
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -88,7 +86,7 @@ export default function Contact() {
           placeholder="Your email"
         />
         {error && <p className="pt-2 text-red-500">{error}</p>}
-        
+
         <textarea
           className="h-52 my-3 rounded-lg border border-gray-300 dark:border-gray-700 p-4 bg-white dark:bg-white/5 dark:hover:bg-white/10 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-800 focus:outline-none transition-all"
           name="message"
@@ -98,7 +96,7 @@ export default function Contact() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        
+
         <SubmitBtn />
       </form>
     </motion.section>
