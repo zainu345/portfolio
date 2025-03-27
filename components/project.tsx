@@ -3,8 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import { projectsData } from "@/lib/data";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaArrowRight, FaTags, FaLaptopCode, FaMobileAlt, FaServer } from "react-icons/fa";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt, FaArrowRight, FaTags, FaLaptopCode, FaMobileAlt, FaServer, FaStar } from "react-icons/fa";
 import Link from "next/link";
 
 type ProjectProps = (typeof projectsData)[number] & {
@@ -24,13 +24,35 @@ export default function Project({
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["0 1", "1.33 1"],
   });
 
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
   const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   // Decide if project is even or odd numbered
@@ -40,39 +62,59 @@ export default function Project({
   const getProjectIcon = () => {
     const firstTag = tags[0]?.toLowerCase() || '';
     if (firstTag.includes('mobile') || firstTag.includes('app')) {
-      return <FaMobileAlt className="text-green-500" />;
+      return <FaMobileAlt className="text-xl" />;
     } else if (firstTag.includes('backend') || firstTag.includes('api')) {
-      return <FaServer className="text-purple-500" />;
+      return <FaServer className="text-xl" />;
     }
-    return <FaLaptopCode className="text-blue-500" />;
+    return <FaLaptopCode className="text-xl" />;
   };
 
   // Get a color theme based on the project index
   const getColorTheme = () => {
     const themes = [
       { 
-        accent: "from-blue-400 to-indigo-500", 
+        accent: "from-blue-500 to-indigo-600", 
+        lightGradient: "from-blue-50 to-indigo-50",
+        darkGradient: "from-blue-900/20 to-indigo-900/20",
         badgeBg: "bg-blue-50 dark:bg-blue-900/20",
         badgeText: "text-blue-600 dark:text-blue-400",
-        iconBg: "bg-blue-100 dark:bg-blue-900/30"
+        iconBg: "bg-blue-100 dark:bg-blue-900/30",
+        hoverBg: "hover:bg-blue-50 dark:hover:bg-blue-900/10",
+        shadowColor: "shadow-blue-500/20 dark:shadow-blue-400/10",
+        borderAccent: "border-blue-200 dark:border-blue-800"
       },
       { 
-        accent: "from-purple-400 to-pink-500", 
+        accent: "from-purple-500 to-pink-600", 
+        lightGradient: "from-purple-50 to-pink-50",
+        darkGradient: "from-purple-900/20 to-pink-900/20",
         badgeBg: "bg-purple-50 dark:bg-purple-900/20",
         badgeText: "text-purple-600 dark:text-purple-400",
-        iconBg: "bg-purple-100 dark:bg-purple-900/30"
+        iconBg: "bg-purple-100 dark:bg-purple-900/30",
+        hoverBg: "hover:bg-purple-50 dark:hover:bg-purple-900/10",
+        shadowColor: "shadow-purple-500/20 dark:shadow-purple-400/10",
+        borderAccent: "border-purple-200 dark:border-purple-800"
       },
       { 
-        accent: "from-green-400 to-teal-500", 
-        badgeBg: "bg-green-50 dark:bg-green-900/20",
-        badgeText: "text-green-600 dark:text-green-400",
-        iconBg: "bg-green-100 dark:bg-green-900/30"
+        accent: "from-emerald-500 to-teal-600", 
+        lightGradient: "from-emerald-50 to-teal-50",
+        darkGradient: "from-emerald-900/20 to-teal-900/20",
+        badgeBg: "bg-emerald-50 dark:bg-emerald-900/20",
+        badgeText: "text-emerald-600 dark:text-emerald-400",
+        iconBg: "bg-emerald-100 dark:bg-emerald-900/30",
+        hoverBg: "hover:bg-emerald-50 dark:hover:bg-emerald-900/10",
+        shadowColor: "shadow-emerald-500/20 dark:shadow-emerald-400/10",
+        borderAccent: "border-emerald-200 dark:border-emerald-800"
       },
       { 
-        accent: "from-amber-400 to-orange-500", 
+        accent: "from-amber-500 to-orange-600", 
+        lightGradient: "from-amber-50 to-orange-50",
+        darkGradient: "from-amber-900/20 to-orange-900/20",
         badgeBg: "bg-amber-50 dark:bg-amber-900/20",
         badgeText: "text-amber-600 dark:text-amber-400",
-        iconBg: "bg-amber-100 dark:bg-amber-900/30"
+        iconBg: "bg-amber-100 dark:bg-amber-900/30",
+        hoverBg: "hover:bg-amber-50 dark:hover:bg-amber-900/10",
+        shadowColor: "shadow-amber-500/20 dark:shadow-amber-400/10",
+        borderAccent: "border-amber-200 dark:border-amber-800"
       },
     ];
     
@@ -95,37 +137,79 @@ export default function Project({
         scale: scaleProgress,
         opacity: opacityProgress,
       }}
-      className="relative"
+      className="relative group py-8 my-16"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Decorative elements */}
+      <motion.div 
+        className={`absolute -z-10 inset-0 bg-gradient-to-br ${colorTheme.lightGradient} dark:${colorTheme.darkGradient} opacity-0 rounded-3xl`}
+        animate={{ opacity: isHovered ? 0.6 : 0 }}
+        transition={{ duration: 0.3 }}
+      />
+      
       {/* Project number badge */}
       <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 z-10">
-        <div className={`w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br ${colorTheme.accent} text-white font-bold text-xl shadow-lg`}>
+        <motion.div 
+          className={`w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br ${colorTheme.accent} text-white font-bold text-2xl shadow-lg ${colorTheme.shadowColor} border-4 border-white dark:border-gray-900`}
+          initial={{ scale: 0.8, opacity: 0, y: 20 }}
+          animate={{ scale: isVisible ? 1 : 0.8, opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          whileHover={{ 
+            scale: 1.1, 
+            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+          }}
+        >
           {(index + 1).toString().padStart(2, '0')}
-        </div>
+        </motion.div>
       </div>
       
       <motion.section 
-        className={`relative bg-white dark:bg-gray-900 max-w-5xl mx-auto rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-xl`}
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -5 }}
+        className={`relative bg-white dark:bg-gray-900 max-w-5xl mx-auto rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-xl ${colorTheme.shadowColor} transition-all duration-500`}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ 
+          y: isVisible ? 0 : 100, 
+          opacity: isVisible ? 1 : 0,
+          boxShadow: isHovered 
+            ? "0 25px 50px -12px rgba(0, 0, 0, 0.25)" 
+            : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+        }}
+        transition={{ 
+          duration: 0.6, 
+          delay: index * 0.15,
+          ease: [0.22, 1, 0.36, 1]
+        }}
       >
-        {/* Top accent bar */}
-        <div className={`h-1.5 w-full bg-gradient-to-r ${colorTheme.accent}`}></div>
+        {/* Top accent bar with shine effect */}
+        <div className={`relative h-2 w-full bg-gradient-to-r ${colorTheme.accent} overflow-hidden`}>
+          <motion.div 
+            className="absolute top-0 left-0 h-full w-20 bg-white opacity-30"
+            animate={{ x: ["-100%", "500%"] }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 2.5,
+              ease: "linear",
+              repeatDelay: 1 
+            }}
+          />
+        </div>
         
         {/* Background elements */}
-        <div className="absolute -top-24 -left-24 w-64 h-64 bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-blue-900/10 dark:to-purple-900/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gradient-to-br from-purple-50/30 to-pink-50/30 dark:from-purple-900/10 dark:to-pink-900/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-blue-900/10 dark:to-purple-900/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-gradient-to-br from-purple-50/30 to-pink-50/30 dark:from-purple-900/10 dark:to-pink-900/10 rounded-full blur-3xl"></div>
         
-        <div className="relative p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Image Section - Conditionally order based on even/odd */}
-            <div className={`relative overflow-hidden rounded-xl shadow-lg h-full ${isEven ? 'lg:order-last' : 'lg:order-first'}`}>
+        <div className="relative p-8 sm:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-10">
+            {/* Image Section with enhanced visual treatments - hidden on mobile */}
+            <div className={`relative overflow-hidden rounded-2xl shadow-xl ${colorTheme.shadowColor} h-full transform transition-transform duration-700 ${isHovered ? "lg:scale-[1.02]" : ""} ${isEven ? 'lg:order-last' : 'lg:order-first'} hidden md:block`}>
+              {/* Simple border frame */}
+              <div className="absolute inset-0 border border-white/30 dark:border-gray-700/30 rounded-2xl z-10 pointer-events-none" />
+              
+              {/* Corner accent */}
+              <div className={`absolute -top-10 -right-10 w-20 h-20 rounded-full bg-gradient-to-br ${colorTheme.accent} opacity-30 blur-xl z-0`} />
+              
               {/* This container maintains consistent height */}
-              <div className="h-full min-h-[320px]">
+              <div className="relative h-full min-h-[350px]">
                 <Image
                   src={imageUrl}
                   alt={`Screenshot of ${title} project`}
@@ -137,23 +221,34 @@ export default function Project({
                     objectFit: 'cover',
                     objectPosition: 'center top'
                   }}
-                  className={`transition-all duration-700 ${isHovered ? 'scale-105' : 'scale-100'}`}
+                  className="transition-all duration-500"
                 />
                 
-                {/* Overlay with buttons on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-end justify-center p-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="flex gap-3">
+                {/* Featured badge */}
+                {index === 0 && (
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-1 px-3 py-1.5 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm text-amber-600 dark:text-amber-400 text-xs font-medium rounded-full shadow-md border border-amber-200 dark:border-amber-800/50">
+                    <FaStar className="text-amber-500" />
+                    <span>Featured Project</span>
+                  </div>
+                )}
+                
+                {/* Overlay with buttons on hover - enhanced */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex items-end justify-center p-8 transition-all duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                  <div className="flex flex-col sm:flex-row gap-4 w-full">
                     {githubUrl && (
                       <motion.a
                         href={githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 bg-white/90 hover:bg-white text-gray-900 rounded-lg font-medium text-sm flex items-center space-x-2 transition-all duration-300"
-                        whileHover={{ y: -5 }}
+                        className="px-5 py-3 bg-white/90 hover:bg-white text-gray-900 rounded-xl font-medium text-sm flex items-center justify-center sm:justify-start space-x-2 transition-all duration-300 backdrop-blur-sm"
+                        whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)" }}
                         whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
                       >
-                        <FaGithub className="mr-2" />
-                        <span>View Code</span>
+                        <FaGithub className="mr-2 text-lg" />
+                        <span>View Source Code</span>
                       </motion.a>
                     )}
                     
@@ -162,12 +257,15 @@ export default function Project({
                         href={liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`px-4 py-2 bg-gradient-to-r ${colorTheme.accent} text-white rounded-lg font-medium text-sm flex items-center space-x-2 transition-all duration-300`}
-                        whileHover={{ y: -5 }}
+                        className={`px-5 py-3 bg-gradient-to-r ${colorTheme.accent} text-white rounded-xl font-medium text-sm flex items-center justify-center sm:justify-start space-x-2 transition-all duration-300 shadow-lg ${colorTheme.shadowColor}`}
+                        whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.3)" }}
                         whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                        transition={{ duration: 0.3, delay: 0.2 }}
                       >
                         <FaExternalLinkAlt className="mr-2" />
-                        <span>Live Demo</span>
+                        <span>View Live Demo</span>
                       </motion.a>
                     )}
                   </div>
@@ -175,33 +273,44 @@ export default function Project({
               </div>
             </div>
             
-            {/* Content Section */}
-            <div className="flex flex-col h-full">
-              {/* Project type and title */}
-              <div className="flex items-center space-x-3 mb-4">
-                <div className={`p-2 rounded-lg ${colorTheme.iconBg}`}>
+            {/* Content Section - Enhanced */}
+            <div className="flex flex-col h-full w-full">
+              {/* Project type and title - with enhanced styling */}
+              <div className="flex items-start space-x-4 mb-6">
+                <div className={`p-3 rounded-xl ${colorTheme.iconBg} ${colorTheme.shadowColor} shadow-md`}>
                   {getProjectIcon()}
                 </div>
                 <div>
-                  <div className={`text-xs font-semibold uppercase tracking-wider ${colorTheme.badgeText}`}>
+                  <motion.div 
+                    className={`text-xs font-semibold uppercase tracking-wider ${colorTheme.badgeText} flex items-center`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                  >
+                    <span className={`inline-block w-6 h-0.5 mr-2 bg-gradient-to-r ${colorTheme.accent}`}></span>
                     {tags[0] || "Project"}
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mt-1">
+                  </motion.div>
+                  <motion.h3 
+                    className="text-3xl font-bold text-gray-800 dark:text-white mt-2 font-heading"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                  >
                     {title}
-                  </h3>
+                  </motion.h3>
                 </div>
               </div>
               
-              {/* Tab navigation */}
-              <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+              {/* Tab navigation - enhanced styling */}
+              <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700 mb-6">
                 {tabContent.map((tab, idx) => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(idx)}
-                    className={`py-2 px-4 text-sm font-medium transition-colors relative ${
+                    className={`py-3 px-5 text-sm font-medium transition-all duration-300 relative rounded-t-lg ${
                       activeTab === idx
-                        ? `text-blue-600 dark:text-blue-400`
-                        : `text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300`
+                        ? `${colorTheme.badgeText} ${colorTheme.badgeBg} border-t border-l border-r ${colorTheme.borderAccent} border-b-0`
+                        : `text-gray-100 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-300 ${colorTheme.hoverBg}`
                     }`}
                   >
                     {tab.label}
@@ -218,39 +327,54 @@ export default function Project({
                 ))}
               </div>
               
-              {/* Tab content */}
-              <div className="flex-grow">
-                <AnimatedTabContent
-                  activeTab={activeTab}
-                  content={tabContent[activeTab].content}
-                />
+              {/* Tab content - improved animation and styling */}
+              <div className="flex-grow mb-6">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-gray-600 dark:text-gray-300 leading-relaxed prose prose-sm dark:prose-invert max-w-none"
+                  >
+                    <p>{tabContent[activeTab].content}</p>
+                  </motion.div>
+                </AnimatePresence>
               </div>
               
-              {/* Tags grid */}
-              <div className="mt-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <FaTags className={colorTheme.badgeText} />
+              {/* Tags grid - visually enhanced */}
+              <div className="mt-auto">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className={`p-1.5 rounded-md ${colorTheme.iconBg}`}>
+                    <FaTags className={`text-xs ${colorTheme.badgeText}`} />
+                  </span>
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400">TECHNOLOGIES</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, tagIndex) => (
-                    <span
+                    <motion.span
                       key={tagIndex}
-                      className={`px-2.5 py-1 text-xs font-medium rounded-full ${colorTheme.badgeBg} ${colorTheme.badgeText} border border-gray-200 dark:border-gray-700`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: tagIndex * 0.05 + 0.3 }}
+                      className={`px-3 py-1.5 text-xs font-medium rounded-full ${colorTheme.badgeBg} ${colorTheme.badgeText} border ${colorTheme.borderAccent} transition-all duration-300 hover:shadow-md ${colorTheme.shadowColor}`}
                     >
                       {tag}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
               
-              {/* View details button */}
+              {/* View details button - enhanced */}
               <Link
                 href={`/projects/${id}`}
-                className={`mt-6 self-start flex items-center gap-2 px-4 py-2 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-lg ${colorTheme.badgeText} transition-all duration-300 hover:shadow-md group`}
+                className={`mt-8 self-start flex items-center gap-2 px-5 py-3 text-sm font-medium border ${colorTheme.borderAccent} rounded-xl ${colorTheme.badgeText} bg-gradient-to-br ${colorTheme.badgeBg} backdrop-blur-sm transition-all duration-300 hover:shadow-md ${colorTheme.shadowColor} group`}
               >
                 View Project Details
-                <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-br ${colorTheme.accent} text-white transition-all duration-300 group-hover:w-7`}>
+                  <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" />
+                </span>
               </Link>
             </div>
           </div>

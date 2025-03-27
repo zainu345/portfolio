@@ -6,7 +6,8 @@ import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
-import { FaGithubSquare, FaCode, FaServer, FaMobile } from "react-icons/fa";
+import { FaGithubSquare, FaCode, FaServer, FaMobile, FaDatabase, FaRobot, FaCloud } from "react-icons/fa";
+import { SiOpenai, SiAzuredevops } from "react-icons/si";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 
@@ -17,13 +18,31 @@ export default function Intro() {
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Rotating skills showcase
+  // Calculate years of experience (from 2024 to current year)
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1; // JavaScript months are 0-indexed
+  const startYear = 2024;
+  const startMonth = 1; // January
+  
+  let yearsExperience = currentYear - startYear;
+  // If we haven't reached the anniversary month yet in the current year, subtract 1
+  if (currentMonth < startMonth) {
+    yearsExperience -= 1;
+  }
+  
+  // For display purposes - show "X+ years" or "X+ months" based on actual experience
+  const experienceText = yearsExperience >= 1 
+    ? `${yearsExperience}+ years`
+    : `${(currentMonth - startMonth) + (currentYear - startYear) * 12}+ months`;
+
+  // Rotating skills showcase - updated with expanded expertise
   const skills = [
-    { text: "MERN Stack", icon: <FaCode className="text-blue-500" /> },
-    { text: "Next.js", icon: <FaServer className="text-green-500" /> },
-    { text: "Nest.js", icon: <FaServer className="text-red-500" /> },
-    { text: "Responsive Design", icon: <FaMobile className="text-purple-500" /> },
-    { text: "Prompt Engineering", icon: <FaCode className="text-amber-500" /> }
+    { text: "Frontend Development", icon: <FaCode className="text-blue-500" /> },
+    { text: "Backend Systems", icon: <FaServer className="text-green-500" /> },
+    { text: "DevOps & Cloud", icon: <FaCloud className="text-orange-500" /> },
+    { text: "LLM Integration", icon: <SiOpenai className="text-purple-500" /> },
+    { text: "AI Solutions", icon: <FaRobot className="text-red-500" /> },
+    { text: "Full Stack Development", icon: <FaDatabase className="text-indigo-500" /> }
   ];
 
   // Rotate through skills every 3 seconds
@@ -185,9 +204,9 @@ export default function Intro() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-              <span>A passionate Full Stack Developer with</span>
+              <span>A versatile Tech Specialist with</span>
               <span className="font-semibold text-blue-600 dark:text-blue-400">
-                1+ year of experience
+                {experienceText} of experience
               </span>
             </div>
             

@@ -23,6 +23,16 @@ export default function Experience() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const timelineRef = useRef<HTMLDivElement>(null);
+  
+  // Toggle expanded state for timeline items
+  const toggleExpand = (index: number) => {
+    setExpandedItems((prev) => 
+      prev.includes(index) 
+        ? prev.filter(item => item !== index) 
+        : [...prev, index]
+    );
+  };
+  
   // Check if an item is expanded
   const isExpanded = (index: number) => expandedItems.includes(index);
 
@@ -142,8 +152,8 @@ export default function Experience() {
         </motion.div>
 
         <div className="relative" ref={timelineRef}>
-          {/* Decorative elements */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 transform -translate-x-1/2 -z-10 opacity-30 rounded-full"></div>
+          {/* Decorative timeline - Now different for mobile and desktop */}
+          <div className="absolute md:left-1/2 left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 transform md:-translate-x-1/2 -z-10 opacity-30 rounded-full"></div>
           
           <motion.div 
             variants={containerVariants}
@@ -158,11 +168,14 @@ export default function Experience() {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className={`relative flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                  className={`relative flex ${index % 2 === 0 ? 'md:flex-row flex-row' : 'md:flex-row-reverse flex-row'}`}
                   onMouseEnter={() => setHoveredItem(index)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
-                  {/* Timeline connector with animation */}
+                  {/* Mobile timeline connector */}
+                  <div className="md:hidden absolute left-4 top-0 bottom-0 w-0.5 h-full transform -translate-x-1/2 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+                  
+                  {/* Desktop timeline connector with animation */}
                   <div className="hidden md:block absolute left-1/2 top-8 w-10 h-0.5 transform -translate-x-1/2 bg-gray-300 dark:bg-gray-700">
                     <motion.div 
                       className={`h-full ${gradientColors.accent}`}
@@ -172,14 +185,14 @@ export default function Experience() {
                     />
                   </div>
                   
-                  {/* Date bubble */}
-                  <div className={`absolute left-1/2 top-8 transform -translate-x-1/2 -translate-y-1/2 ${gradientColors.accent} w-16 h-16 rounded-full flex items-center justify-center text-white text-xs font-semibold z-10 shadow-lg`}>
+                  {/* Date bubble - repositioned for mobile */}
+                  <div className={`absolute md:left-1/2 left-4 top-8 transform md:-translate-x-1/2 -translate-x-1/2 -translate-y-1/2 ${gradientColors.accent} w-8 h-8 md:w-16 md:h-16 rounded-full flex items-center justify-center text-white text-xs font-semibold z-10 shadow-lg`}>
                     {item.date?.split(' ')[0] || '2023'}
                   </div>
                   
-                  {/* Content card */}
+                  {/* Content card - adjusted for mobile */}
                   <motion.div 
-                    className={`relative mt-16 md:mt-4 md:w-[calc(50%-3rem)] bg-gradient-to-br ${
+                    className={`relative mt-16 ml-8 md:ml-0 md:mt-4 w-full md:w-[calc(50%-3rem)] bg-gradient-to-br ${
                       theme === "light" 
                         ? gradientColors.light 
                         : gradientColors.dark
@@ -238,8 +251,7 @@ export default function Experience() {
                         }`}>
                           {item.description}
                         </p>
-                        </div>
-                      
+                      </div>
                       {/* Detailed bullet points - shown when expanded */}
                       {isExpanded(index) && item.details && (
                         <motion.div 
