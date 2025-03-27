@@ -1,4 +1,3 @@
-// Projects.tsx - Main Projects Container Component
 'use client';
 
 import React, { useState } from "react";
@@ -8,6 +7,45 @@ import Project from "./project";
 import { useSectionInView } from "@/lib/hooks";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight, FaFilter } from "react-icons/fa";
+
+// PaginationButton Component defined outside the main component
+const PaginationButton = ({ index, currentPage, onClick }) => {
+  const isActive = currentPage === index;
+  
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`relative w-8 h-8 mx-1 rounded-full overflow-hidden flex items-center justify-center`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {/* Background with gradient for active state */}
+      <motion.div 
+        className={`absolute inset-0 z-0 ${
+          isActive 
+            ? 'bg-gradient-to-r from-blue-500 to-indigo-600' 
+            : 'bg-gray-200 dark:bg-gray-700'
+        }`}
+        animate={{ 
+          scale: isActive ? [0.8, 1] : 1
+        }}
+        transition={{ 
+          duration: 0.3,
+          type: "spring", 
+          stiffness: 300, 
+          damping: 20 
+        }}
+      />
+      
+      {/* Number */}
+      <span className={`relative z-10 text-sm font-medium ${
+        isActive ? 'text-white' : 'text-gray-700 dark:text-gray-300'
+      }`}>
+        {index + 1}
+      </span>
+    </motion.button>
+  );
+};
 
 export default function Projects() {
   const { ref } = useSectionInView("Projects", 0);
@@ -125,55 +163,127 @@ export default function Projects() {
           )}
         </motion.div>
         
-        {/* Pagination controls */}
+        {/* Enhanced Pagination controls */}
         {filteredProjects.length > projectsPerPage && (
-          <div className="flex justify-center items-center mt-16">
-            <motion.button
-              onClick={prevPage}
-              disabled={currentPage === 0}
-              className={`flex items-center justify-center w-10 h-10 rounded-full mr-4 
-                ${currentPage === 0 
-                  ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed' 
-                  : 'bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30'}`}
-              whileHover={currentPage !== 0 ? { scale: 1.1 } : {}}
-              whileTap={currentPage !== 0 ? { scale: 0.9 } : {}}
-            >
-              <FaArrowLeft />
-            </motion.button>
-            
-            <div className="flex items-center">
-              {Array.from({ length: totalPages }).map((_, idx) => (
-                <motion.button
-                  key={idx}
-                  onClick={() => {
-                    setCurrentPage(idx);
-                    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className={`w-8 h-8 mx-1 rounded-full text-sm font-medium 
-                    ${currentPage === idx 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30'}`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {idx + 1}
-                </motion.button>
-              ))}
+          <motion.div 
+            className="flex flex-col items-center gap-4 mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            {/* Page indicator text */}
+            <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              Page {currentPage + 1} of {totalPages}
             </div>
             
-            <motion.button
-              onClick={nextPage}
-              disabled={currentPage === totalPages - 1}
-              className={`flex items-center justify-center w-10 h-10 rounded-full ml-4 
-                ${currentPage === totalPages - 1 
-                  ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed' 
-                  : 'bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30'}`}
-              whileHover={currentPage !== totalPages - 1 ? { scale: 1.1 } : {}}
-              whileTap={currentPage !== totalPages - 1 ? { scale: 0.9 } : {}}
-            >
-              <FaArrowRight />
-            </motion.button>
-          </div>
+            <div className="flex items-center gap-2 bg-white dark:bg-gray-800 p-1.5 rounded-full shadow-md">
+              {/* Previous button with gradient hover */}
+              <motion.button
+                onClick={prevPage}
+                disabled={currentPage === 0}
+                className={`relative overflow-hidden flex items-center justify-center w-10 h-10 rounded-full
+                  ${currentPage === 0 
+                    ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed' 
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
+                whileHover={currentPage !== 0 ? { scale: 1.05 } : {}}
+                whileTap={currentPage !== 0 ? { scale: 0.95 } : {}}
+              >
+                {/* Hover background effect */}
+                {currentPage !== 0 && (
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-full z-0"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
+                <span className="relative z-10">
+                  <FaArrowLeft />
+                </span>
+              </motion.button>
+              
+              {/* Page number buttons */}
+              <div className="flex items-center">
+                {Array.from({ length: totalPages }).map((_, idx) => {
+                  // Show ellipsis for many pages
+                  if (totalPages > 5) {
+                    // Always show first, last, current, and adjacent pages
+                    if (
+                      idx === 0 || 
+                      idx === totalPages - 1 || 
+                      idx === currentPage || 
+                      idx === currentPage - 1 || 
+                      idx === currentPage + 1
+                    ) {
+                      return (
+                        <PaginationButton 
+                          key={idx}
+                          index={idx}
+                          currentPage={currentPage}
+                          onClick={() => {
+                            setCurrentPage(idx);
+                            document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        />
+                      );
+                    } else if (
+                      (idx === currentPage - 2 && currentPage > 1) || 
+                      (idx === currentPage + 2 && currentPage < totalPages - 2)
+                    ) {
+                      // Show ellipsis
+                      return (
+                        <div key={idx} className="w-8 text-center">
+                          <span className="text-gray-500 dark:text-gray-400">...</span>
+                        </div>
+                      );
+                    } else {
+                      return null;
+                    }
+                  }
+                  
+                  // Show all pages if 5 or fewer
+                  return (
+                    <PaginationButton 
+                      key={idx}
+                      index={idx}
+                      currentPage={currentPage}
+                      onClick={() => {
+                        setCurrentPage(idx);
+                        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              
+              {/* Next button with gradient hover */}
+              <motion.button
+                onClick={nextPage}
+                disabled={currentPage === totalPages - 1}
+                className={`relative overflow-hidden flex items-center justify-center w-10 h-10 rounded-full
+                  ${currentPage === totalPages - 1 
+                    ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed' 
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
+                whileHover={currentPage !== totalPages - 1 ? { scale: 1.05 } : {}}
+                whileTap={currentPage !== totalPages - 1 ? { scale: 0.95 } : {}}
+              >
+                {/* Hover background effect */}
+                {currentPage !== totalPages - 1 && (
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-full z-0"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
+                <span className="relative z-10">
+                  <FaArrowRight />
+                </span>
+              </motion.button>
+            </div>
+          </motion.div>
         )}
       </div>
     </section>

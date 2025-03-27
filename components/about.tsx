@@ -11,7 +11,8 @@ import Link from "next/link";
 export default function About() {
   const { ref } = useSectionInView("About");
   const [activeTab, setActiveTab] = useState(0);
-  const [hoveredTab, setHoveredTab] = useState(null);
+  // Fix: Change type from null to number | null
+  const [hoveredTab, setHoveredTab] = useState<number | null>(null);
   const aboutRef = useRef(null);
   const isInView = useInView(aboutRef, { once: true, margin: "-100px" });
 
@@ -244,25 +245,6 @@ export default function About() {
               </AnimatePresence>
             </div>
           </div>
-
-          {/* Call to action */}
-          <motion.div
-            className="mt-8 flex justify-center"
-            variants={childVariants}
-          >
-            <Link
-              href="/resume"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium shadow-lg shadow-blue-500/20 dark:shadow-blue-800/20 transform transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-            >
-              View My Resume
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                →
-              </motion.span>
-            </Link>
-          </motion.div>
         </div>
       </div>
     </motion.section>

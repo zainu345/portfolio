@@ -5,23 +5,16 @@ import SectionHeading from "./section-heading";
 import { experiencesData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   FaBriefcase, 
   FaGraduationCap, 
-  FaBuilding, 
   FaMapMarkerAlt, 
   FaClock, 
-  FaChevronDown, 
-  FaChevronUp, 
   FaExternalLinkAlt,
-  FaCode,
-  FaLaptopCode,
-  FaServer,
   FaUserTie,
-  FaUsers
 } from "react-icons/fa";
-import { MdWork, MdSchool, MdSupervisorAccount } from "react-icons/md";
+import { MdWork, MdSchool } from "react-icons/md";
 
 export default function Experience() {
   const { ref } = useSectionInView("Experience", 0);
@@ -30,17 +23,6 @@ export default function Experience() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const timelineRef = useRef<HTMLDivElement>(null);
-
-  // Toggle expanded state for timeline items
-  const toggleExpand = (index: number) => {
-    console.log("Toggling item", index);
-    setExpandedItems((prev) => 
-      prev.includes(index) 
-        ? prev.filter(item => item !== index) 
-        : [...prev, index]
-    );
-  };
-
   // Check if an item is expanded
   const isExpanded = (index: number) => expandedItems.includes(index);
 
