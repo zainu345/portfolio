@@ -12,6 +12,45 @@ import { BsCodeSquare } from "react-icons/bs";
 export const experiencesData = [
   {
     id: 1,
+    title: "Senior Software Engineer & Team Lead",
+    location: "Developer Tag, Lahore, Pakistan",
+    description: "Leading development teams in a full-time hybrid role. Specializing in MERN/Next.js backend architecture, advanced DevOps solutions, and AI integration with LangChain/LangGraph. Implementing containerized deployments, payment gateways, and managing cloud databases across multiple projects.",
+    icon: React.createElement(MdSupervisorAccount),
+    date: "Jan 2025 - Present",
+    type: "fulltime",
+    skills: [
+      "MERN Stack",
+      "Next.js",
+      "DevOps",
+      "LangChain",
+      "LangGraph",
+      "LLM Integration",
+      "AWS",
+      "Railway",
+      "Docker",
+      "Stripe",
+      "MongoDB Atlas",
+      "CI/CD",
+      "Team Leadership",
+      "Git Workflow",
+      "Project Management"
+    ],
+    details: [
+      "Leading backend architecture decisions and development teams",
+      "Building scalable MERN/Next.js backend systems",
+      "Developing AI solutions with LangChain and LangGraph",
+      "Implementing advanced DevOps pipelines with AWS and Railway",
+      "Setting up Docker containerization for consistent deployments",
+      "Optimizing Git workflows and deployment strategies",
+      "Stripe payment gateway integration for e-commerce solutions",
+      "MongoDB Atlas configuration and performance optimization",
+      "Managing multiple projects simultaneously",
+      "Mentoring junior developers on best practices",
+      "Establishing efficient workflows and coding standards"
+    ]
+  },
+  {
+    id: 2,
     title: "Software Engineer",
     location: "DiveScale, Lahore, Pakistan",
     description: "Working as a Full Stack & AI Developer with expertise in Next.js, MERN stack, and AI technologies. Building applications from scratch following clean and DRY code principles. Implementing state management with Zustand and React Hooks while developing scalable backend services.",
@@ -45,37 +84,6 @@ export const experiencesData = [
       "Optimizing prompts for efficiency and accuracy in AI applications",
       "Hands-on experience with AWS, Vercel, and CI/CD pipelines",
       "Strong understanding of Git workflows, PR reviews, and code quality"
-    ]
-  },
-  {
-    id: 2,
-    title: "Team Lead",
-    location: "Developer Tag, Lahore, Pakistan",
-    description: "Leading development teams in a part-time hybrid role. Focusing on advanced DevOps solutions including AWS, Railway deployment, and Docker containerization. Implementing Stripe payment integrations and managing MongoDB Atlas databases across multiple projects.",
-    icon: React.createElement(MdSupervisorAccount),
-    date: "Jan 2025 - Present",
-    type: "parttime",
-    skills: [
-      "DevOps", 
-      "AWS", 
-      "Railway", 
-      "Docker", 
-      "Stripe", 
-      "MongoDB Atlas", 
-      "CI/CD", 
-      "Team Leadership", 
-      "Project Management"
-    ],
-    details: [
-      "Leading development teams in hybrid work environment",
-      "Implementing advanced DevOps solutions at scale",
-      "Setting up AWS and Railway deployment pipelines",
-      "Docker containerization for consistent deployments",
-      "Stripe payment gateway integration for e-commerce solutions",
-      "MongoDB Atlas configuration and optimization",
-      "Managing multiple projects simultaneously",
-      "Mentoring junior developers",
-      "Establishing best practices for team workflows"
     ]
   },
   {
