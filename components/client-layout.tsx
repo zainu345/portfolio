@@ -9,9 +9,21 @@ import { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
+interface ClientLayoutProps {
+  children: React.ReactNode;
+  viewMode?: 'portfolio' | 'terminal';
+  onViewModeChange?: (mode: 'portfolio' | 'terminal') => void;
+  onChatToggle?: () => void;
+  showChatWidget?: boolean;
+}
+
 export default function ClientLayout({
   children,
-}) {
+  viewMode = 'portfolio',
+  onViewModeChange,
+  onChatToggle,
+  showChatWidget = false
+}: ClientLayoutProps) {
   const [starCount, setStarCount] = useState(100);
   
   // Adjust star count based on screen size
@@ -135,13 +147,20 @@ export default function ClientLayout({
       <div className="relative flex flex-col min-h-screen">
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
-            {/* Sticky header with galaxy-themed glass effect - adjusted for both themes */}
+            {/* Sticky header with galaxy-themed glass effect - NOW PROPERLY PASSES PROPS */}
             <div className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-950/70 border-b border-gray-200/50 dark:border-white/5 shadow-md">
-              <Header />
+              <Header 
+                viewMode={viewMode}
+                onViewModeChange={onViewModeChange}
+                onChatToggle={onChatToggle}
+                showChatWidget={showChatWidget}
+              />
             </div>
             
-            {/* Main content area */}
-            <main className="flex-grow pt-20 pb-20 px-4 sm:px-6 mx-auto w-full max-w-7xl">
+            {/* Main content area - Conditional padding for terminal mode */}
+            <main className={`flex-grow w-full max-w-7xl mx-auto ${
+              viewMode === 'portfolio' ? 'pt-20 pb-20 px-4 sm:px-6' : 'pt-0 pb-0 px-0'
+            }`}>
               <AnimatePresence mode="wait">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -155,8 +174,8 @@ export default function ClientLayout({
               </AnimatePresence>
             </main>
             
-            {/* Footer */}
-            <Footer />
+            {/* Footer - Only show in portfolio mode */}
+            {viewMode === 'portfolio' && <Footer />}
 
             {/* Toast notifications with theme-aware galaxy styling */}
             <Toaster 
@@ -186,10 +205,12 @@ export default function ClientLayout({
               }}
             />
             
-            {/* Theme toggle button */}
-            <div className="fixed bottom-5 right-5 z-40">
-              <ThemeSwitch />
-            </div>
+            {/* Theme toggle button - Only show in portfolio mode */}
+            {viewMode === 'portfolio' && (
+              <div className="fixed bottom-5 right-5 z-40">
+                <ThemeSwitch />
+              </div>
+            )}
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
       </div>

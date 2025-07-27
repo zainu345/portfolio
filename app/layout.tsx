@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
-import ClientLayout from "@/components/client-layout";
+
 
 // Font setup
 const inter = Inter({ 
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`!scroll-smooth ${inter.variable} ${poppins.variable}`}>
       <body className={`${inter.className} relative bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300`}>
-        <ClientLayout>{children}</ClientLayout>
+        {children}
       </body>
     </html>
   );
