@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Abdul Aziz Personal Website
 
 ## Overview
@@ -70,3 +71,7 @@ Feel free to reach out or connect with me on various platforms:
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+=======
+# Portsts
+dcd
+>>>>>>> eb2d61a45fbe0aa84b983a5eff66e86e469c1ecb
