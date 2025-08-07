@@ -21,25 +21,29 @@ export default function Intro() {
   // Calculate years of experience (from 2024 to current year)
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1; // JavaScript months are 0-indexed
-  const startYear = 2024;
+  const startYear = 2020;
   const startMonth = 1; // January
   
   let yearsExperience = currentYear - startYear;
   // If we haven't reached the anniversary month yet in the current year, subtract 1
   if (currentMonth < startMonth) {
-    yearsExperience -= 1;
+    yearsExperience -= 3;
   }
   
   // For display purposes - show "X+ years" or "X+ months" based on actual experience
-  const experienceText = yearsExperience >= 1 
-    ? `${yearsExperience}+ years`
-    : `${(currentMonth - startMonth) + (currentYear - startYear) * 12}+ months`;
+  const totalMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth);
+  const yearsofExperience = Math.floor(totalMonths / 12);
+  
+  const experienceText = yearsExperience >= 1
+    ? `${yearsofExperience}+ years`
+    : `${totalMonths}+ months`;
+  
 
   // Rotating skills showcase - updated with expanded expertise
   const skills = [
-    { text: "Frontend Development", icon: <FaCode className="text-blue-500" /> },
-    { text: "Backend Systems", icon: <FaServer className="text-green-500" /> },
-    { text: "DevOps & Cloud", icon: <FaCloud className="text-orange-500" /> },
+    { text: "React + NextJs Development", icon: <FaCode className="text-blue-500" /> },
+    { text: "Backend Development", icon: <FaServer className="text-green-500" /> },
+    { text: " Cloud Dev", icon: <FaCloud className="text-orange-500" /> },
     { text: "LLM Integration", icon: <SiOpenai className="text-purple-500" /> },
     { text: "AI Solutions", icon: <FaRobot className="text-red-500" /> },
     { text: "Full Stack Development", icon: <FaDatabase className="text-indigo-500" /> }
@@ -133,15 +137,10 @@ export default function Intro() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 >
-                  <Image
-                    src="/dp.jpg" // Ensure this image exists in your public folder
-                    alt="Abdul Aziz"
-                    width="192"
-                    height="192"
-                    quality="95"
-                    priority={true}
-                    className="h-32 w-32 rounded-full object-cover shadow-xl"
-                  />
+                  <video>
+                    <source src="/images/profile.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </motion.div>
               </div>
             </motion.div>
@@ -187,7 +186,7 @@ export default function Intro() {
           >
             Hi, I'm{" "}
             <span className="inline-block relative">
-              <span className="relative z-10">Abdul Aziz</span>
+              <span className="relative z-10">Zain Rafique</span>
               <motion.span 
                 className="absolute bottom-0 left-0 w-full h-3 bg-blue-200 dark:bg-blue-800/50 -z-10"
                 initial={{ width: 0 }}
@@ -204,7 +203,7 @@ export default function Intro() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-              <span>A versatile Tech Specialist with</span>
+              <span>A results-driven  specialist with</span>
               <span className="font-semibold text-blue-600 dark:text-blue-400">
                 {experienceText} of experience
               </span>
@@ -216,7 +215,7 @@ export default function Intro() {
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              <span className="mr-2">Specializing in</span>
+              <span className="mr-2">Demonstrated expertise in</span>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSkillIndex}
@@ -304,7 +303,7 @@ export default function Intro() {
             >
               <a
                 className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full shadow-md border border-blue-200 dark:border-blue-800"
-                href="https://linkedin.com/in/connect2abdulaziz"
+                href="https://www.linkedin.com/in/zayn-rconnect/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
@@ -321,7 +320,7 @@ export default function Intro() {
             >
               <a
                 className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 rounded-full shadow-md border border-gray-200 dark:border-gray-700"
-                href="https://github.com/connect2abdulaziz"
+                href="https://github.com/ZainRafiqueDev"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"

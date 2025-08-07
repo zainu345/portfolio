@@ -43,9 +43,9 @@ export default function Experience() {
         return <FaGraduationCap className="text-amber-500" />;
       case 'education':
         return <MdSchool className="text-blue-500" />;
-      case 'fulltime':
+      case 'full-time':
         return <MdWork className="text-green-500" />;
-      case 'parttime':
+      case 'part-time':
         return <FaUserTie className="text-purple-500" />;
       default:
         return <FaBriefcase className="text-gray-500" />;
@@ -128,7 +128,7 @@ export default function Experience() {
         >
           <SectionHeading>My Experience</SectionHeading>
           <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            My professional journey and career milestones that have shaped my expertise across full-stack development, AI & ML, and leadership roles.
+          A career built on progressive milestones across full-stack development, AI/ML, and leadership, shaping a well-rounded and future-focused technical profile.
           </p>
           
           {/* Filter tabs */}

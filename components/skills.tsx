@@ -121,10 +121,9 @@ export default function Skills() {
       ref={ref}
       className="mb-28 max-w-[62rem] scroll-mt-28 px-4 sm:px-8 mx-auto text-center"
     >
-      <SectionHeading>Skills & Expertise</SectionHeading>
+      <SectionHeading>Specialized Expertise</SectionHeading>
       <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-[42rem] mx-auto">
-        My technical proficiency spans multiple domains including full-stack development, AI & ML, and DevOps,
-        enabling me to build comprehensive solutions from concept to deployment.
+      Skilled in full-stack development, AI/ML, and DevOps, with a proven ability to deliver complete solutions from concept to production.
       </p>
 
       {/* Top skills spotlight */}
@@ -145,7 +144,7 @@ export default function Skills() {
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   i < getStarRating(skill.proficiency) ? (
-                    <FaStar key={i} className="text-yellow-500 text-xs" />
+                    <FaStar key={i-1} className="text-yellow-500 text-xs" />
                   ) : (
                     <FaRegStar key={i} className="text-gray-400 text-xs" />
                   )
@@ -293,10 +292,9 @@ export default function Skills() {
         transition={{ delay: 0.3, duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <h3 className="text-xl font-bold mb-2">Always Learning, Always Growing</h3>
+        <h3 className="text-xl font-bold mb-2">Committed to Continuous Growth and Learning</h3>
         <p className="opacity-90">
-          My skill set continues to evolve as I explore new technologies and methodologies. 
-          I'm passionate about staying at the forefront of industry best practices.
+        My skill set is constantly evolving as I explore emerging technologies and innovative methodologies. I’m deeply committed to staying at the forefront of industry trends and best practices.
         </p>
       </motion.div>
     </section>

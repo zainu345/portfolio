@@ -10,6 +10,9 @@ import {
   FaCode,
   FaReact, 
   FaNodeJs,
+  FaDatabase,
+
+
   FaArrowUp
 } from "react-icons/fa";
 import { TbBrandNextjs, TbBrandTypescript } from "react-icons/tb";
@@ -38,6 +41,9 @@ export default function Footer() {
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-500" /> },
     { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
+    { name: "MongDB", icon: <FaDatabase className="text-green-700" /> },
+    { name: "Express.js", icon: <FaCode className="text-gray-800 dark:text-gray-200" /> }
+   
   ];
 
   // Animation variants
@@ -75,20 +81,20 @@ export default function Footer() {
           <div className="relative mb-6">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full opacity-75 blur"></div>
             <div className="relative h-20 w-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-3xl font-bold text-white">AA</span>
+              <span className="text-3xl font-bold text-white">ZR</span>
             </div>
           </div>
           
-          <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Abdul Aziz</h3>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">Full Stack Developer</p>
+          <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Zain Rafique</h3>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Full Stack Mern/Mean/Mevn Developer</p>
           
           {/* Social links with hover effect */}
           <div className="flex justify-center space-x-4 mt-6">
             {[
-              { icon: <FaLinkedin />, url: "https://linkedin.com/in/connect2abdulaziz", color: "bg-blue-500 hover:bg-blue-600" },
-              { icon: <FaGithub />, url: "https://github.com/connect2abdulaziz", color: "bg-gray-700 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-700" },
-              { icon: <FaEnvelope />, url: "mailto:connect2abdulaziz@gmail.com", color: "bg-red-500 hover:bg-red-600" },
-              { icon: <FaTwitter />, url: "https://twitter.com", color: "bg-blue-400 hover:bg-blue-500" }
+              { icon: <FaLinkedin />, url: "https://linkedin.com/in/zayn-rconnect", color: "bg-blue-500 hover:bg-blue-600" },
+              { icon: <FaGithub />, url: "https://github.com/ZainRafiqueDev", color: "bg-gray-700 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-700" },
+              { icon: <FaEnvelope />, url: "mailto:zaindev@gmail.com", color: "bg-red-500 hover:bg-red-600" },
+              { icon: <FaTwitter />, url: "https://x.com/Zaindev23", color: "bg-blue-400 hover:bg-blue-500" }
             ].map((social, index) => (
               <motion.a
                 key={index}
@@ -178,7 +184,7 @@ export default function Footer() {
             >
               <FaHeart />
             </motion.div>
-            <span>by Abdul Aziz</span>
+            <span>by Zain Rafique</span>
           </p>
           <p className="mt-2 text-gray-500 dark:text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} All rights reserved

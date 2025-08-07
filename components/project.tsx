@@ -9,6 +9,7 @@ import Link from "next/link";
 
 type ProjectProps = (typeof projectsData)[number] & {
   index: number;
+  tags: any;
 };
 
 export default function Project({
@@ -127,8 +128,13 @@ export default function Project({
   const tabContent = [
     { id: 'overview', label: 'Overview', content: description },
     { id: 'features', label: 'Key Features', content: 'This project includes several key features...' },
-    { id: 'tech', label: 'Technologies', content: tags.join(', ') }
+    { 
+      id: 'tech', 
+      label: 'Technologies', 
+      content: Array.isArray(tags) ? tags.join(', ') : 'No technologies listed' 
+    }
   ];
+  
 
   return (
     <motion.div

@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import SectionHeading from "./section-heading";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import { FaRocket, FaBriefcase, FaTools, FaStar, FaGithub } from "react-icons/fa";
+import { FaRocket, FaBriefcase, FaTools, FaStar, FaGithub } from "react-icons/fa"
 import Image from "next/image";
 import Link from "next/link";
 

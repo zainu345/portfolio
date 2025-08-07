@@ -38,7 +38,7 @@ export default function ThemeSwitch() {
       {/* Icon container with animation */}
       <motion.div
         className="relative z-10"
-        animate={{ 
+        animate={{
           rotate: theme === "light" ? 0 : 180,
           scale: isHovered ? 1.2 : 1
         }}
