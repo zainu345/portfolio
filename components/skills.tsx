@@ -179,8 +179,7 @@ export default function Skills() {
         {filteredSkills.map((category, categoryIndex) => (
           <motion.div
             key={categoryIndex}
-            className={`relative bg-gradient-to-br ${gradientMapping[category.category] || "from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/50"} 
-                      ${borderMapping[category.category] || "border-gray-200 dark:border-gray-700"} 
+            className={`relative bg-gradient-to-br ${gradientMapping[category.category] || "from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/50"} ${borderMapping[category.category] || "border-gray-200 dark:border-gray-700"} 
                       border-2 rounded-xl p-6 shadow-lg hover:shadow-xl transition
                       overflow-hidden`}
             initial="initial"
@@ -299,4 +298,4 @@ export default function Skills() {
       </motion.div>
     </section>
   );
-} 
+}
