@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/header";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
@@ -118,7 +117,7 @@ export default function ClientLayout({
                       dark:from-gray-800/15 dark:via-gray-900/20 dark:to-gray-800/10
                       blur-3xl"></div>
         
-      {/* Cosmic dust overlay - different for light and dark */}
+        {/* Cosmic dust overlay - different for light and dark */}
         <div className="absolute inset-0 dark:bg-noise bg-noise opacity-[0.02] dark:opacity-[0.05] pointer-events-none"></div>
         
         {/* Shooting stars - only in dark mode for better visibility */}
@@ -147,20 +146,9 @@ export default function ClientLayout({
       <div className="relative flex flex-col min-h-screen">
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
-            {/* Sticky header with galaxy-themed glass effect - NOW PROPERLY PASSES PROPS */}
-            <div className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-950/70 border-b border-gray-200/50 dark:border-white/5 shadow-md">
-              <Header 
-                viewMode={viewMode}
-                onViewModeChange={onViewModeChange}
-                onChatToggle={onChatToggle}
-                showChatWidget={showChatWidget}
-              />
-            </div>
             
-            {/* Main content area - Conditional padding for terminal mode */}
-            <main className={`flex-grow w-full max-w-7xl mx-auto ${
-              viewMode === 'portfolio' ? 'pt-20 pb-20 px-4 sm:px-6' : 'pt-0 pb-0 px-0'
-            }`}>
+            {/* Main content area - Let page.tsx handle its own layout */}
+            <main className="flex-grow w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
