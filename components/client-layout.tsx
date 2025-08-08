@@ -24,9 +24,12 @@ export default function ClientLayout({
   showChatWidget = false
 }: ClientLayoutProps) {
   const [starCount, setStarCount] = useState(100);
+  const [isClient, setIsClient] = useState(false);
   
-  // Adjust star count based on screen size
+  // Ensure we're on the client side
   useEffect(() => {
+    setIsClient(true);
+    
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 768) {
@@ -43,6 +46,70 @@ export default function ClientLayout({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Generate consistent stars array
+  const [stars] = useState(() => {
+    return Array.from({ length: 150 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 2.5,
+      animationDuration: Math.random() * 50 + 10,
+      opacity: Math.random() * 0.7 + 0.3,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      delay: Math.random() * 10
+    }));
+  });
+
+  const [lightParticles] = useState(() => {
+    return Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 1,
+      animationDuration: Math.random() * 20 + 15,
+      delay: Math.random() * 5,
+      top: Math.random() * 100,
+      left: Math.random() * 100
+    }));
+  });
+
+  const [shootingStars] = useState(() => {
+    return Array.from({ length: 3 }, (_, i) => ({
+      id: i,
+      top: Math.random() * 80,
+      left: Math.random() * 80 + 10,
+      animationDuration: Math.random() * 10 + 15,
+      delay: Math.random() * 30
+    }));
+  });
+
+  // Don't render stars until client-side
+  if (!isClient) {
+    return (
+      <>
+        {/* Simplified background for SSR */}
+        <div className="fixed inset-0 -z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 dark:from-black dark:via-gray-950 dark:to-black opacity-90 dark:opacity-100"></div>
+        </div>
+        
+        <div className="relative flex flex-col min-h-screen">
+          <ThemeContextProvider>
+            <ActiveSectionContextProvider>
+              <main className="flex-grow w-full">
+                {children}
+              </main>
+              {viewMode === 'portfolio' && <Footer />}
+              <Toaster position="top-right" />
+              {viewMode === 'portfolio' && (
+                <div className="fixed bottom-5 right-5 z-40">
+                  <ThemeSwitch />
+                </div>
+              )}
+            </ActiveSectionContextProvider>
+          </ThemeContextProvider>
+        </div>
+      </>
+    );
+  }
+
+  
   return (
     <>
       {/* Galaxy background with stars - different for light/dark mode */}
@@ -53,52 +120,40 @@ export default function ClientLayout({
         {/* Soft clouds/nebulae effect for light mode */}
         <div className="absolute inset-0 light-clouds opacity-30 hidden md:block"></div>
         
-        {/* Animated stars - generated dynamically - different for each theme */}
+        {/* Animated stars - generated consistently */}
         <div className="stars-container absolute inset-0">
           {/* Stars for dark mode only */}
-          {[...Array(starCount)].map((_, i) => {
-            const size = Math.random() * 2.5;
-            const animationDuration = Math.random() * 50 + 10;
-            const opacity = Math.random() * 0.7 + 0.3;
-            
-            return (
-              <div
-                key={i}
-                className="absolute rounded-full bg-white dark:block hidden"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  opacity: opacity,
-                  boxShadow: `0 0 ${size * 2}px ${size}px rgba(255, 255, 255, ${opacity * 0.8})`,
-                  animation: `twinkle ${animationDuration}s infinite ease-in-out ${Math.random() * 10}s`
-                }}
-              />
-            );
-          })}
+          {stars.slice(0, starCount).map((star) => (
+            <div
+              key={star.id}
+              className="absolute rounded-full bg-white dark:block hidden"
+              style={{
+                top: `${star.top}%`,
+                left: `${star.left}%`,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                opacity: star.opacity,
+                boxShadow: `0 0 ${star.size * 2}px ${star.size}px rgba(255, 255, 255, ${star.opacity * 0.8})`,
+                animation: `twinkle ${star.animationDuration}s infinite ease-in-out ${star.delay}s`
+              }}
+            />
+          ))}
           
           {/* Smaller particles for light mode */}
-          {[...Array(30)].map((_, i) => {
-            const size = Math.random() * 3 + 1;
-            const animationDuration = Math.random() * 20 + 15;
-            const delay = Math.random() * 5;
-            
-            return (
-              <div
-                key={`light-particle-${i}`}
-                className="absolute rounded-full bg-indigo-200 dark:hidden block"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  opacity: 0.4,
-                  animation: `float ${animationDuration}s infinite ease-in-out ${delay}s`
-                }}
-              />
-            );
-          })}
+          {lightParticles.map((particle) => (
+            <div
+              key={`light-particle-${particle.id}`}
+              className="absolute rounded-full bg-indigo-200 dark:hidden block"
+              style={{
+                top: `${particle.top}%`,
+                left: `${particle.left}%`,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                opacity: 0.4,
+                animation: `float ${particle.animationDuration}s infinite ease-in-out ${particle.delay}s`
+              }}
+            />
+          ))}
         </div>
         
         {/* Distant galaxies/nebulae - soft gradients for light, darker for dark */}
@@ -121,25 +176,18 @@ export default function ClientLayout({
         <div className="absolute inset-0 dark:bg-noise bg-noise opacity-[0.02] dark:opacity-[0.05] pointer-events-none"></div>
         
         {/* Shooting stars - only in dark mode for better visibility */}
-        {[...Array(3)].map((_, i) => {
-          const top = Math.random() * 80;
-          const left = Math.random() * 80 + 10;
-          const animationDuration = Math.random() * 10 + 15;
-          const delay = Math.random() * 30;
-          
-          return (
-            <div
-              key={`shooting-star-${i}`}
-              className="absolute w-[150px] h-[1px] bg-gradient-to-r from-transparent via-white to-transparent transform -rotate-[30deg] hidden dark:block"
-              style={{
-                top: `${top}%`,
-                left: `${left}%`,
-                opacity: 0,
-                animation: `shootingStar ${animationDuration}s infinite linear ${delay}s`
-              }}
-            />
-          );
-        })}
+        {shootingStars.map((star) => (
+          <div
+            key={`shooting-star-${star.id}`}
+            className="absolute w-[150px] h-[1px] bg-gradient-to-r from-transparent via-white to-transparent transform -rotate-[30deg] hidden dark:block"
+            style={{
+              top: `${star.top}%`,
+              left: `${star.left}%`,
+              opacity: 0,
+              animation: `shootingStar ${star.animationDuration}s infinite linear ${star.delay}s`
+            }}
+          />
+        ))}
       </div>
       
       {/* Main content with glass morphism */}
