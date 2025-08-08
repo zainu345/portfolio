@@ -1,37 +1,30 @@
-import "./globals.css";
-import { Inter, Poppins } from "next/font/google";
-import ClientLayout from "@/components/client-layout";
+import Header from "@/components/header";
+import Intro from "@/components/intro";
+import SectionDivider from "@/components/section-divider";
+import About from "@/components/about";
+import Projects from "@/components/projects";
+import Skills from "@/components/skills";
+import Experience from "@/components/experience";
+import Contact from "@/components/contact";
 
-// Font setup
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap"
-});
-
-const poppins = Poppins({ 
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  display: "swap"
-});
-
-export const metadata = {
-  title: "Zain Rafqiue | Full Stack Developer Portfolio",
-  description: "Zain Rafique is a full-stack developer specializing in MERN stack, Next.js and Nest.js with 1+ years of professional experience.",
-  keywords: ["developer", "portfolio", "full stack", "MERN", "react", "next.js", "nest.js"],
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Home() {
   return (
-    <html lang="en" className={`!scroll-smooth ${inter.variable} ${poppins.variable}`}>
-      <body className={`${inter.className} relative bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300`}>
-        <ClientLayout>{children}</ClientLayout>
-      </body>
-    </html>
+    <main className="flex flex-col items-center px-4">
+      {/* Header with sticky positioning and backdrop blur */}
+      <div className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-gray-950/70 border-b border-gray-200/50 dark:border-white/5 shadow-md">
+        <Header />
+      </div>
+      
+      {/* Main content sections */}
+      <div className="max-w-7xl mx-auto pt-20 pb-20">
+        <Intro />
+        <SectionDivider />
+        <About />
+        <Projects />
+        <Skills />
+        <Experience />
+        <Contact />
+      </div>
+    </main>
   );
 }
