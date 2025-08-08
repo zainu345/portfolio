@@ -299,4 +299,4 @@ export default function Skills() {
       </motion.div>
     </section>
   );
-}
+} 
