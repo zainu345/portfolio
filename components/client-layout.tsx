@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/header";
+
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
