@@ -174,23 +174,26 @@ export default function Footer() {
         </div>
         
         {/* Copyright section */}
-        <div className="text-center">
-          <p className="flex items-center justify-center text-gray-600 dark:text-gray-400">
-            <span>Made with</span>
-            <motion.div
-              className="mx-2 text-red-500"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-            >
-              <FaHeart />
-            </motion.div>
-            <span>by Zain Rafique</span>
-          </p>
-          <p className="mt-2 text-gray-500 dark:text-gray-500 text-sm">
+       <div className="flex items-center justify-center text-gray-600 dark:text-gray-400">
+  <span>Made with</span>
+  <motion.span
+    className="mx-2 text-red-500 inline-flex"
+    animate={{ scale: [1, 1.2, 1] }}
+    transition={{ repeat: Infinity, duration: 1.5 }}
+  >
+        <FaHeart />
+        </motion.span>
+        <span >by Zain Rafique
+              
+          </span><p className="mt-2 text-gray-500 dark:text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} All rights reserved
           </p>
+
+
+
+          
         </div>
-      </div>
+    </div>
     </footer>
   );
 }
