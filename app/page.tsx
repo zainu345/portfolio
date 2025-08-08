@@ -7,7 +7,8 @@ import Intro from "@/components/intro";
 import Projects from "@/components/projects";
 import SectionDivider from "@/components/section-divider";
 import Skills from "@/components/skills";
-import Terminal from "@/components/terminal/Terminal";
+// import Terminal from "@/components/terminal/Terminal";
+import Header from "@/components/header";
 import ClientLayout from "@/components/client-layout";
 import ChatWidget from "@/components/chat-widget";
 import { useState, useEffect } from "react";
@@ -69,6 +70,18 @@ export default function Home() {
       onChatToggle={handleChatToggle}
       showChatWidget={showChatWidget}
     >
+      {/* Header - Only show in portfolio mode */}
+      {viewMode === 'portfolio' && (
+        <div className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-gray-950/70 border-b border-gray-200/50 dark:border-white/5 shadow-md">
+          <Header 
+            viewMode={viewMode}
+            onViewModeChange={handleViewModeChange}
+            onChatToggle={handleChatToggle}
+            showChatWidget={showChatWidget}
+          />
+        </div>
+      )}
+
       {/* Main Content */}
       <AnimatePresence mode="wait">
         {viewMode === 'terminal' ? (
@@ -89,7 +102,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center px-4 pt-20 pb-20 max-w-7xl mx-auto"
           >
             {/* Intro section with skeleton */}
             {loadedSections.intro ? (
@@ -128,69 +141,7 @@ export default function Home() {
               <SkeletonSkills />
             )}
             
-            {/* Interactive Terminal Preview Section */}
-            {loadedSections.skills && (
-              <motion.section
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="w-full max-w-[53rem] scroll-mt-28 mb-28"
-                id="terminal-preview"
-              >
-                <h2 className="text-3xl font-bold text-center mb-8">Interactive Experience</h2>
-                <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 shadow-2xl">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      </div>
-                      <span className="text-gray-300 text-sm ml-2">Abdul Aziz - Terminal Portfolio</span>
-                    </div>
-                  </div>
-                  <div className="text-green-400 font-mono text-sm space-y-2 mb-6">
-                    <div>abdul@aziz:~$ help</div>
-                    <div className="text-green-300 text-xs pl-4">
-                      Available commands: about | skills | projects | experience | contact | chat
-                    </div>
-                    <div>abdul@aziz:~$ chat</div>
-                    <div className="text-blue-300 text-xs pl-4">
-                      🤖 Hi! Ask me anything about Abdul's background and expertise!
-                    </div>
-                    <div className="flex items-center">
-                      <span>chat@abdul:~$ </span>
-                      <div className="w-2 h-4 bg-green-400 ml-1 animate-pulse"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <button
-                        onClick={() => handleViewModeChange('terminal')}
-                        className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center gap-2 mx-auto mb-2"
-                      >
-                        <Monitor size={20} />
-                        Launch Terminal
-                      </button>
-                      <p className="text-gray-400 text-xs">Full interactive experience</p>
-                    </div>
-                    
-                    <div className="text-center">
-                      <button
-                        onClick={handleChatToggle}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center gap-2 mx-auto mb-2"
-                      >
-                        <MessageCircle size={20} />
-                        Quick Chat
-                      </button>
-                      <p className="text-gray-400 text-xs">AI assistant widget</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.section>
-            )}
-            
+            Interactive Terminal Preview Section
             {/* Contact section with skeleton */}
             {loadedSections.contact ? (
               <Contact />
