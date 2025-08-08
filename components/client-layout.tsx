@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/header";
+
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
@@ -148,14 +148,7 @@ export default function ClientLayout({
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             {/* Sticky header with galaxy-themed glass effect - NOW PROPERLY PASSES PROPS */}
-            <div className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-950/70 border-b border-gray-200/50 dark:border-white/5 shadow-md">
-              <Header 
-                viewMode={viewMode}
-                onViewModeChange={onViewModeChange}
-                onChatToggle={onChatToggle}
-                showChatWidget={showChatWidget}
-              />
-            </div>
+            
             
             {/* Main content area - Conditional padding for terminal mode */}
             <main className={`flex-grow w-full max-w-7xl mx-auto ${
