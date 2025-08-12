@@ -61,7 +61,9 @@ export default function Project({
 
   // Get complementary icon for the project based on first tag
   const getProjectIcon = () => {
-    const firstTag = tags[0]?.toLowerCase() || '';
+    const firstTag = Array.isArray(tags) && tags.length > 1
+    ? tags[1].toLowerCase()
+    : '';
     if (firstTag.includes('mobile') || firstTag.includes('app')) {
       return <FaMobileAlt className="text-xl" />;
     } else if (firstTag.includes('backend') || firstTag.includes('api')) {
@@ -294,7 +296,8 @@ export default function Project({
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                   >
                     <span className={`inline-block w-6 h-0.5 mr-2 bg-gradient-to-r ${colorTheme.accent}`}></span>
-                    {tags[0] || "Project"}
+                    {Array.isArray(tags) && tags.length > 0 ? tags[0] : "Project"}
+
                   </motion.div>
                   <motion.h3 
                     className="text-3xl font-bold text-gray-800 dark:text-white mt-2 font-heading"
@@ -358,17 +361,17 @@ export default function Project({
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400">TECHNOLOGIES</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {tags.map((tag, tagIndex) => (
-                    <motion.span
-                      key={tagIndex}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: tagIndex * 0.05 + 0.3 }}
-                      className={`px-3 py-1.5 text-xs font-medium rounded-full ${colorTheme.badgeBg} ${colorTheme.badgeText} border ${colorTheme.borderAccent} transition-all duration-300 hover:shadow-md ${colorTheme.shadowColor}`}
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
+                  {Array.isArray(tags) && tags.length > 0 && tags.map((tag, tagIndex) => (
+                  <motion.span
+                key={tagIndex}
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.3, delay: tagIndex * 0.05 + 0.3 }}
+    className={`px-3 py-1.5 text-xs font-medium rounded-full ${colorTheme.badgeBg} ${colorTheme.badgeText} border ${colorTheme.borderAccent} transition-all duration-300 hover:shadow-md ${colorTheme.shadowColor}`}
+  >
+    {tag}
+  </motion.span>
+))}
                 </div>
               </div>
               
