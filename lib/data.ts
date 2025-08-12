@@ -256,7 +256,7 @@ export const projectsData = [
     description:
       "Bull Street is a cinematic on-demand streaming platform created to showcase the emotional and historical storytelling of the Bull Street documentary. It offers viewers a smooth, theater-like experience to stream, learn about the cast, read reviews, and securely access the film from anywhere.",
     tags: ["React.js, Tailwind CSS, Stripe API, Vimeo/HTML5 video player, Figma for UI/UX"],
-    imageUrl: "./bull.jpg",
+    imageUrl: "/bull.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "",
@@ -278,7 +278,7 @@ export const projectsData = [
     title: "BlackTokenomics–Tokenomics Design & Consulting App",
     description:
       "BlackTokenomics is a specialized Web3 firm dedicated to designing, auditing, modeling, simulating, and validating tokenomics for blockchain projects, venture capitals, and launchpads. The platform offers comprehensive services to ensure economic stability and attract investors by creating robust tokenomics frameworks.",
-    imageUrl: "./token.jpg",
+    imageUrl: "/token.jpg",
     liveUrl: "",
     githubUrl: "",
     type: "backend",
@@ -300,7 +300,7 @@ export const projectsData = [
     description:
       "PropGrid360 is an innovative real estate management platform designed to streamline property listings, client relationships, and business operations for real estate professionals. ",
     tags: ["React", "Express", "Nest.js", "PostgreSQL", "led AWS", "JavaScript", "TypeScript"],
-    imageUrl: "./popgrid.jpg",
+    imageUrl: "/popgrid.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "fullstack",
@@ -320,7 +320,7 @@ export const projectsData = [
     description:
       "Healthdesk.ai is an AI-powered communication platform designed to enhance client engagement for health and wellness businesses. Integrated seamlessly with Mindbody, it automates and personalizes interactions across multiple channels, including SMS, web chat, Facebook, and Instagram.",
     tags: ["Python", "JavaScript", "E-commerce", "MongoDB", "JQuery"],
-    imageUrl: "./myhealth.jpg",
+    imageUrl: "/myhealth.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "web",
@@ -340,7 +340,7 @@ export const projectsData = [
     description:
       "NewsTone Arena is a mobile application designed to streamline onboarding, membership registration, and digital point transfers for event attendees. Built with a focus on simplicity and usability, this app offers a seamless experience from sign-up to QR scanning and in-app currency management.",
     tags: ["Next.js", "JavaScript", "TypeScript", "Vercel Deployment"],
-    imageUrl: "./newsletter.jpg",
+    imageUrl: "/newsletter.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "web",
@@ -361,7 +361,7 @@ export const projectsData = [
     title: "RevBits – Comprehensive Cybersecurity Solutions",
     description: "RevBits is an advanced cybersecurity platform offering endpoint security, email security, privileged access management, and deception technology to protect organizations from cyber threats.", 
     tags: [" Node.js ", "React.js", "REST APIs", "PostgreSQL","MongoDB"],
-    imageUrl: "./Revbits.jpg",
+    imageUrl: "/Revbits.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "mobile",
@@ -380,7 +380,7 @@ export const projectsData = [
     title: "Smart Trainer - AI-Powered Operational Excellence",
     description:
       "Smart Trainer is an AI-powered platform designed to optimize operations in the restaurant and retail sectors. It acts as a virtual manager and data analyst, leveraging real-time insights to improve decision-making while ensuring operational efficiency.",
-    imageUrl: "./Smart_20Trainer.jpg",
+    imageUrl: "/Smart_20Trainer.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "desktop",
