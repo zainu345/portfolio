@@ -361,7 +361,7 @@ export const projectsData = [
     title: "RevBits – Comprehensive Cybersecurity Solutions",
     description: "RevBits is an advanced cybersecurity platform offering endpoint security, email security, privileged access management, and deception technology to protect organizations from cyber threats.", 
     tags: [" Node.js ", "React.js", "REST APIs", "PostgreSQL","MongoDB"],
-    imageUrl: "./Revbits.com",
+    imageUrl: "./Revbits.jpg",
     githubUrl: "",
     liveUrl: "",
     type: "mobile",
